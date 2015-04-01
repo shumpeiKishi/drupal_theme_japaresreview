@@ -1,0 +1,33 @@
+name = Japa Res Review
+description = Custom theme for Japa Res Review
+core = 7.x
+
+; CSS
+stylesheets[all][] = css/bootstrap.css
+stylesheets[all][] = css/style.css
+
+; JavaScripts
+
+; Regions
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+
+regions[topbar_first] = Topbar First
+regions[topbar_second] = Topbar Second
+regions[topbar_third] = Topbar Third
+
+
+regions[header_first] = Header First
+regions[header_second] = Header Second
+
+regions[featured_first] = Featured First
+regions[featured_second] = Featured Second
+regions[content] = Content
+regions[sidebar_first] = Sidebar First
+regions[sidebar_second] = Sidebar Second
+regions[help] = Help
+
+regions[footer_firstcolumn] = Footer First Colmun
+regions[footer_secondcolumn] = Footer Second Colmun
+regions[footer_thirdcolumn] = Footer Third Colmun
+regions[footer_bottom] = Footer Bottom
