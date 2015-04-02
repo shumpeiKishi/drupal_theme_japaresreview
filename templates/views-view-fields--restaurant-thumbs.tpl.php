@@ -25,7 +25,7 @@
  */
 ?>
 <a href="<?php print url('node/' . $row->nid) ?>">
-  <div style="background-image: url('<?php print file_create_url($row->comment_photo_uri); ?>'); height: 300px; width: 300px">
-    <?php print $row->node_title; ?>
-  </div>
+	<div class="res-thumb-container" style="background-image: url('<?php print file_create_url($row->comment_photo_uri); ?>');">
+		<h4 class="res-thumb-title"><?php print $row->node_title; ?></h4> 
+	</div>
 </a>

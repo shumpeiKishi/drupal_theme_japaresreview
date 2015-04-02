@@ -87,39 +87,40 @@
         <div class="col-xs-12">
           <h1><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h1>
           <?php if((isset($content['comment_stars_avg'])) && $content['comment_stars_avg']): ?>
-          <div class="review-stars">
-            <?php print $content['comment_stars_avg']; ?>
-          </div>
-        <?php endif; ?>
-      </div>
-      <!-- /.col-xs-12 -->
-      <div class="col-xs-5">
-        <?php
-        hide($content['body']);
-        hide($content['field_budget']);
-        hide($content['field_menu']);
-        print render($content['field_phone']);
-        print render($content['field_address']);
+            <div class="review-stars">
+              <?php print _japaresreview_get_review_stars($content['comment_stars_avg']); ?>
+            </div>
+          <?php endif; ?>
+        </div>
+        <!-- /.col-xs-12 -->
+        <div class="col-xs-5">
+          <?php
+          hide($content['body']);
+          hide($content['field_budget']);
+          hide($content['field_menu']);
+          print render($content['field_phone']);
+          print render($content['field_address']);
+          ?>
+          <div id="res-map" class="res-map" style="height: 240px;"></div>
+        </div>
+        <!-- /.col-xs-5 -->
+        <div class="col-xs-7">
+          <?php print render($content['body']); ?>
+          <?php print render($content['field_budget']); ?>
+          <?php print render($content['field_menu']); ?>
 
-        ?>
+        </div>
+        <!-- /.col-xs-7 -->
       </div>
-      <!-- /.col-xs-5 -->
-      <div class="col-xs-7">
-        <?php print render($content['body']); ?>
-        <?php print render($content['field_budget']); ?>
-        <?php print render($content['field_menu']); ?>
-      </div>
-      <!-- /.col-xs-7 -->
+      <!-- /.row -->
     </div>
-    <!-- /.row -->
+    <!-- /.col-xs-7 -->
+    <div class="col-xs-5">
+      <?php //print render($content['comment_images']); ?>
+    </div>
+    <!-- /.col-xs-5 -->
   </div>
-  <!-- /.col-xs-7 -->
-  <div class="col-xs-5">
-    <?php //print render($content['comment_images']); ?>
-  </div>
-  <!-- /.col-xs-5 -->
-</div>
-<!-- /.row -->
+  <!-- /.row -->
 
 <?php elseif ($teaser): ?>
   <div class="row">

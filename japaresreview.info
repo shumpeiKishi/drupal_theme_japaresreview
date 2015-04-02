@@ -3,8 +3,7 @@ description = Custom theme for Japa Res Review
 core = 7.x
 
 ; CSS
-stylesheets[all][] = css/bootstrap.css
-stylesheets[all][] = css/style.css
+stylesheets[all][] = assets/css/style.css
 
 ; JavaScripts
 

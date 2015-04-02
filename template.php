@@ -2,6 +2,7 @@
 /**
  * Add css files.
  */
+drupal_add_css('http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300italic|Yanone+Kaffeesatz:400,700', array('type' => 'external'));
 drupal_add_css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', array('type' => 'external'));
 drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', array('type' => 'external'));
 
@@ -67,8 +68,16 @@ function japaresreview_preprocess_node(&$variables) {
       '#markup' => _japaresreview_get_comment_image($variables['nid']),
       );
   }
+  if ($variables['type'] === 'restaurant') {
+    $res_geocode = array(
+      'lat' => $variables['field_address'][0]['latitude'],
+      'lng' => $variables['field_address'][0]['longitude'],
+      );
+    drupal_add_js(array('resGeocode' => $res_geocode), 'setting');
+    drupal_add_js('http://maps.googleapis.com/maps/api/js?key=AIzaSyBMAAIRyYmd0OPAn4-2rRwgABrbpwQ9UdI&sensor=false', 'external');
+    drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/script.js', 'file');
+  }
 }
-
 
 /**
  * Implements template_preprocess_views_view_fields().
@@ -97,4 +106,17 @@ function _japaresreview_get_comment_image ($nid) {
     }
   }
   return $default_image;
+}
+
+function _japaresreview_get_review_stars ($star_num) {
+  $output = '';
+  for ($i = 0; $i < 5; $i ++) {
+    if ($i < $star_num) {
+      $star_type = 'fa-star';
+    } else {
+      $star_type = 'fa-star-o';
+    }
+    $output .= '<i class="fa ' . $star_type . '"></i>';
+  }
+  return $output;
 }

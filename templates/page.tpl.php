@@ -99,27 +99,27 @@
       <div class="row">
         <div class="col-xs-3">
          <?php if ($logo): ?>
-         <div class="logo">
-           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-            <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-          </a>
-        </div>
-        <!-- /.logo -->
-      <?php endif; ?>            
+           <div class="logo">
+             <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+              <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+            </a>
+          </div>
+          <!-- /.logo -->
+        <?php endif; ?>            
+      </div>
+      <!-- /.col-xs-3 -->
+      <div class="col-xs-5">
+        <?php print render($page['header_first']); ?>
+      </div>
+      <!-- /.col-xs-5 -->
+      <div class="col-xs-4">
+        <?php print render($page['header_second']); ?>
+      </div>
+      <!-- /.col-xs-4 -->
     </div>
-    <!-- /.col-xs-3 -->
-    <div class="col-xs-5">
-      <?php print render($page['header_first']); ?>
-    </div>
-    <!-- /.col-xs-5 -->
-    <div class="col-xs-4">
-      <?php print render($page['header_second']); ?>
-    </div>
-    <!-- /.col-xs-4 -->
+    <!-- /.row -->
   </div>
-  <!-- /.row -->
-</div>
-<!-- /.container -->
+  <!-- /.container -->
 </div>
 <!-- /.container-fluid -->
 
@@ -137,10 +137,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <?php if ($main_menu): ?>
-      <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'inline', 'clearfix', 'nav', 'navbar-nav')))); ?>
-    <?php endif; ?>
-  </div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
+        <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'inline', 'clearfix', 'nav', 'navbar-nav')))); ?>
+      <?php endif; ?>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
 </header>
 

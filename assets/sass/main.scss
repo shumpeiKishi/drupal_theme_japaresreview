@@ -1,0 +1,131 @@
+/* BASE */
+$main-color: #c0392b;
+$base-color: #ffffff;
+$base-color-transparent: rgba($base-color, 0.4);
+$text-color: #333333;
+$text-color-inverse: #ffffff;
+$base-font: 'Source Sans Pro', 'helvetica neue', 'helvetica', 'arial', 'sans serif';
+$accent-font: 'Yanone Kaffeesatz';
+
+
+html {
+	font-size: 100%;
+	font-size: 62.5%; // 1rem = 10px.
+}
+
+body {
+	font: 400 1.6rem/1.4 $base-font;
+	background-image: url('../images/jp-paper.png');
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+	font-family: $accent-font;
+	font-weight: 700;
+	color: $main-color;
+}
+
+h1, .h1 {
+	font-size: 4rem;
+}
+
+h2, .h2 {
+	font-size: 3.2rem;
+}
+
+h3, .h3 {
+	font-size: 2.4rem;
+}
+
+h4, .h4 {
+	font-size: 1.8rem;
+}
+
+
+
+a {
+	color: $main-color;
+}
+
+/* LAYOUT */
+.header-main {
+	background-image: url('../images/cloth.png');
+}
+
+.topbar {
+	background-image: url('../images/jp-paper-red.png');
+	padding: 0.8rem 0;
+}
+
+.navbar {
+	background-image: url('../images/jp-paper-red.png');
+	a {
+		color: #ffffff !important;
+		font: 700 1.8rem $base-font;
+	}
+}
+
+/* COMPONENTS */
+.review-stars {
+	color: $main-color;
+}
+
+.view-restaurant-thumbs {
+	>.view-content {
+		margin: 0 -1.5rem;
+		>div {
+			width: 25%;
+			float: left;
+			padding: 0 1.5rem;
+			margin-bottom: 3rem;
+			.res-thumb-container {
+				background-size: cover;
+				background-position: center;
+				min-height: 120px;
+				border: 2px solid #ffffff;
+				position: relative;
+				&:hover {
+					border-color: $main-color;
+				}
+			}
+			.res-thumb-title {
+				background-color: rgba(#000, 0.4);
+				color: $text-color-inverse;
+				font-weight: 400;
+				padding: 0.8rem;
+				position: absolute;
+				right: 0;
+				left: 0;
+				bottom: 0;
+				margin-bottom: 1.6rem;
+				text-align: right;
+			}
+		}
+	}
+}
+
+#block-views-restaurant-thumbs-block {
+	.view-content>.views-row {
+		.res-thumb-container {
+			min-height: 20rem;
+		}
+		.res-thumb-title {
+			font: 700 2.4rem $accent-font;
+		}
+	}
+	.view-content>.views-row-first {
+		width: 50%;
+		.res-thumb-container {
+			min-height: 43rem;
+		}
+	}
+}
+
+
+
+/* STATE */
+
+.navbar a.active, .navbar a:hover {
+	background-color: $base-color-transparent !important;
+}
+
+/* THEME */
