@@ -58,6 +58,17 @@ a {
   color: #c0392b;
 }
 
+.res-thumb-container {
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #ffffff;
+  position: relative;
+  min-height: 240px;
+}
+.res-thumb-container:hover {
+  border-color: #c0392b;
+}
+
 .view-restaurant-thumbs > .view-content {
   margin: 0 -1.5rem;
 }
@@ -68,14 +79,7 @@ a {
   margin-bottom: 3rem;
 }
 .view-restaurant-thumbs > .view-content > div .res-thumb-container {
-  background-size: cover;
-  background-position: center;
   min-height: 120px;
-  border: 2px solid #ffffff;
-  position: relative;
-}
-.view-restaurant-thumbs > .view-content > div .res-thumb-container:hover {
-  border-color: #c0392b;
 }
 .view-restaurant-thumbs > .view-content > div .res-thumb-title {
   background-color: rgba(0, 0, 0, 0.4);

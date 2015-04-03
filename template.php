@@ -40,13 +40,6 @@ function japaresreview_page_alter(&$variables) {
         };
         $variables['featured_first']['system_main']['nodes'][$nid]['comment_images'][] = $comment['field_photos'];
       }
-        // Calculate average number of stars for the restaurant.
-      foreach ($comments as $key => $comment) {
-        if ((!isset($comment['field_stars'])) || (!is_numeric($key))) {
-          continue;
-        }
-        $variables['featured_first']['system_main']['nodes'][$nid]['comment_stars'][] = $comment['field_stars']['#items'][0]['value'];
-      }
       } // Restaurant node
     }
   }
@@ -55,28 +48,78 @@ function japaresreview_page_alter(&$variables) {
 /**
  * Implements template_preprocess_node().
  */
+// function japaresreview_preprocess_node(&$variables) {
+//   // If node page.
+//   if ($variables['nid'] === arg(1)) {
+//     $variables['content']['comment_stars_avg'] = _japaresreview_get_review_star_avg($variables['nid']);
+//   }
+
+//   // If teaser.
+//   if ($variables['view_mode'] === 'teaser') {
+//     $variables['content']['comment_photo_uri'] = array(
+//       'type' => 'markup',
+//       '#markup' => _japaresreview_get_comment_image($variables['nid']),
+//       );
+//   }
+
+//   // If restaurant page.
+//   if (($variables['type'] === 'restaurant') && ($variables['page'] == TRUE)) {
+
+//     // Add js for Google map api 
+//     if (!isset($variables['field_address'][0])) { return ;}
+//     $res_geocode = array(
+//       'lat' => $variables['field_address'][0]['latitude'],
+//       'lng' => $variables['field_address'][0]['longitude'],
+//       );
+//     drupal_add_js(array('resGeocode' => $res_geocode), 'setting');
+//     drupal_add_js('http://maps.googleapis.com/maps/api/js?key=AIzaSyBMAAIRyYmd0OPAn4-2rRwgABrbpwQ9UdI&sensor=false', 'external');
+//     drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/script.js', 'file');
+//   }
+// }
+
 function japaresreview_preprocess_node(&$variables) {
-  if ($variables['nid'] === arg(1)) {
-    if (isset($variables['content']['comment_stars'])) {
-      $comment_stars = $variables['content']['comment_stars'];
-      $variables['content']['comment_stars_avg'] = round(array_sum($comment_stars) / count($comment_stars));  
+  $node_type = $variables['type'];
+  $view_mode = $variables['view_mode'];
+  switch ($node_type) {
+    case 'restaurant' : {
+      // For any view mode.
+
+      // Add variable['comment_star_avg'] as average of star gained.
+      $variables['content']['comment_stars_avg'] = _japaresreview_get_review_star_avg($variables['nid']);
+
+      // For page view
+      if ($view_mode === 'full') {
+        // Add js for Google map api 
+        if (!isset($variables['field_address'][0])) { return ;}
+        // Add geocode to Drupal.setting.
+        $res_geocode = array(
+          'lat' => $variables['field_address'][0]['latitude'],
+          'lng' => $variables['field_address'][0]['longitude'],
+          );
+        drupal_add_js(array('resGeocode' => $res_geocode), 'setting');
+        // Googlemap API js file
+        drupal_add_js('http://maps.googleapis.com/maps/api/js?key=AIzaSyBMAAIRyYmd0OPAn4-2rRwgABrbpwQ9UdI&sensor=false', 'external');
+        drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/script.js', 'file');
+      }
+
+      // For teaser.
+      if ($view_mode === 'teaser') {
+        // Add variable['comment_photo_uri'] as thumbnail image uri.
+        $variables['content']['comment_photo_uri'] = array(
+          'type' => 'markup',
+          '#markup' => _japaresreview_get_comment_image($variables['nid']),
+          );
+      }
+
     }
   }
-  if ($variables['view_mode'] === 'teaser') {
-    $variables['content']['comment_photo_uri'] = array(
-      'type' => 'markup',
-      '#markup' => _japaresreview_get_comment_image($variables['nid']),
-      );
-  }
-  if ($variables['type'] === 'restaurant') {
-    $res_geocode = array(
-      'lat' => $variables['field_address'][0]['latitude'],
-      'lng' => $variables['field_address'][0]['longitude'],
-      );
-    drupal_add_js(array('resGeocode' => $res_geocode), 'setting');
-    drupal_add_js('http://maps.googleapis.com/maps/api/js?key=AIzaSyBMAAIRyYmd0OPAn4-2rRwgABrbpwQ9UdI&sensor=false', 'external');
-    drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/script.js', 'file');
-  }
+}
+
+/**
+ * 
+ */
+function japaresreview_preprocess_comment(&$variables) {
+  unset($variables['content']['links']['comment']['#links']['comment-reply']);
 }
 
 /**
@@ -98,15 +141,43 @@ function japaresreview_preprocess_views_view_fields(&$variables) {
  */
 function _japaresreview_get_comment_image ($nid) {
   $node = node_load($nid);
-  $comments = comment_node_page_additions($node)['comments'];
+  $comments = comment_node_page_additions($node);
   $default_image = 'http://japaresreview.dd:8083/sites/japaresreview.dd/files/logo.png';
-  foreach ($comments as $cid => $comment) {
-    if (isset($comment['field_photos'])) {
-      return $comment['field_photos']['#items'][0]['uri'];
-    }
+  
+  if (isset($comments['comments'])) {
+    foreach ($comments['comments'] as $cid => $comment) {
+      if (isset($comment['field_photos'])) {
+        return $comment['field_photos']['#items'][0]['uri'];
+      }
+    }  
   }
   return $default_image;
 }
+
+/**
+ * 
+ */
+
+function _japaresreview_get_review_star_num ($nid) {
+ $node = node_load($nid);
+ $comments = comment_node_page_additions($node);
+ $star_nums = array();
+ foreach ($comments['comments'] as $cid => $comment) {
+  if (!is_numeric($cid) || (!isset($comment['field_stars']))) { continue; }
+  $star_nums[$cid] = $comment['field_stars']['#items'][0]['value'];
+}
+return $star_nums;
+}
+
+function _japaresreview_get_review_star_avg ($nid) {
+  $stars = _japaresreview_get_review_star_num($nid);
+  $stars_avg = intval(round(array_sum($stars) / count($stars)));
+  return $stars_avg;
+} 
+
+/**
+ * 
+ */
 
 function _japaresreview_get_review_stars ($star_num) {
   $output = '';

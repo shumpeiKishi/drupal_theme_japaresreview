@@ -190,7 +190,6 @@
         <!-- /.row -->
       </div>
       <!-- /.col-xs-10 -->
-
     </div>
     <!-- /.row -->
   </div>
@@ -226,5 +225,3 @@
   <!-- /.container-fluid -->
 </footer>
 <!-- /.footer main-footer -->
-
-</div></div> <!-- /#page, /#page-wrapper -->

@@ -101,14 +101,15 @@
           print render($content['field_phone']);
           print render($content['field_address']);
           ?>
-          <div id="res-map" class="res-map" style="height: 240px;"></div>
+          <?php if($content['field_address']): ?>
+            <div id="res-map" class="res-map" style="height: 240px;"></div>
+          <?php endif; ?>
         </div>
         <!-- /.col-xs-5 -->
         <div class="col-xs-7">
           <?php print render($content['body']); ?>
           <?php print render($content['field_budget']); ?>
           <?php print render($content['field_menu']); ?>
-
         </div>
         <!-- /.col-xs-7 -->
       </div>
@@ -123,14 +124,18 @@
   <!-- /.row -->
 
 <?php elseif ($teaser): ?>
+  <?php //kpr($content); ?>
   <div class="row">
     <div class="col-xs-12">
-      <h2><a href="<?php print $node_url; ?>"><?php print $title; ?> <?php print render($content['comment_star_avg']); ?></a></h2>
+      <h2><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+      <div class="review-stars">
+        <?php print _japaresreview_get_review_stars($content['comment_stars_avg']); ?>
+      </div>
     </div>
     <!-- /.col-xs-12 -->
     <div class="col-xs-4">
       <a href="<?php print $node_url; ?>">
-        <div class="img_thumb" style="height: 240px; background-image: url('<?php print file_create_url($content['comment_photo_uri']['#markup']); ?>');">
+        <div class="img-thumb res-thumb-container" style="background-image: url('<?php print file_create_url($content['comment_photo_uri']['#markup']); ?>');">
         </div>
       </a>
     </div>
@@ -145,4 +150,3 @@
   </div>
   <!-- /.row -->
 <?php endif; ?>
-<?php debug_backtrace();  ?>
