@@ -117,14 +117,30 @@
     </div>
     <!-- /.col-xs-7 -->
     <div class="col-xs-5">
-      <?php //print render($content['comment_images']); ?>
+      <div class="row">
+        <div class="col-xs-8">
+          <img src="<?php print file_create_url($content['comment_images'][0]['#items'][0]['uri']); ?>" alt="">
+        </div>
+        <!-- /.col-xs-8 -->
+        <div class="col-xs-4">
+          <?php if (isset($content['comment_images']) && $content['comment_images']):  ?>
+            <div class="comment_images_thumbs">
+              <?php foreach ($content['comment_images'][0]['#items'] as $images): ?>
+                <div class="res-thumb-container" style="background-image: url('<?php print file_create_url($images['uri']); ?>')"></div>
+              <?php endforeach; ?>
+
+            </div>
+          <?php endif; ?>
+        </div>
+        <!-- /.col-xs-4 -->
+      </div>
+      <!-- /.row -->
     </div>
     <!-- /.col-xs-5 -->
   </div>
   <!-- /.row -->
 
 <?php elseif ($teaser): ?>
-  <?php //kpr($content); ?>
   <div class="row">
     <div class="col-xs-12">
       <h2><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>

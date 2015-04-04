@@ -69,19 +69,19 @@ a {
   border-color: #c0392b;
 }
 
-.view-restaurant-thumbs > .view-content {
+.view-restaurant-thumbs > .view-content, .view-popular-restaurants.view-display-id-block > .view-content {
   margin: 0 -1.5rem;
 }
-.view-restaurant-thumbs > .view-content > div {
+.view-restaurant-thumbs > .view-content > div, .view-popular-restaurants.view-display-id-block > .view-content > div {
   width: 25%;
   float: left;
   padding: 0 1.5rem;
   margin-bottom: 3rem;
 }
-.view-restaurant-thumbs > .view-content > div .res-thumb-container {
+.view-restaurant-thumbs > .view-content > div .res-thumb-container, .view-popular-restaurants.view-display-id-block > .view-content > div .res-thumb-container {
   min-height: 120px;
 }
-.view-restaurant-thumbs > .view-content > div .res-thumb-title {
+.view-restaurant-thumbs > .view-content > div .res-thumb-title, .view-popular-restaurants.view-display-id-block > .view-content > div .res-thumb-title {
   background-color: rgba(0, 0, 0, 0.4);
   color: #ffffff;
   font-weight: 400;
