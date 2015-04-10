@@ -170,9 +170,11 @@ a {
 	#block-views-restaurant-thumbs-block {
 		.view-content>.views-row-first {
 			width: 50%;
+			.res-thumb-container {
+				min-height: 43rem;
+			}
 		}
 	}
-
 }
 
 #block-views-new-photos-block {
