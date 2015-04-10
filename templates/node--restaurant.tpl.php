@@ -82,7 +82,7 @@
 ?>
 <?php if ($page): ?>
   <div class="row">
-    <div class="col-xs-7">
+    <div class="col-xs-12 col-md-7">
       <div class="row">
         <div class="col-xs-12">
           <h1><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h1>
@@ -93,7 +93,7 @@
           <?php endif; ?>
         </div>
         <!-- /.col-xs-12 -->
-        <div class="col-xs-5">
+        <div class="col-xs-12 col-md-5">
           <?php
           hide($content['body']);
           hide($content['field_budget']);
@@ -106,30 +106,46 @@
           <?php endif; ?>
         </div>
         <!-- /.col-xs-5 -->
-        <div class="col-xs-7">
+        <div class="col-xs-12 col-md-7">
           <?php print render($content['body']); ?>
           <?php print render($content['field_budget']); ?>
-          <?php print render($content['field_menu']); ?>
+          <?php if (isset($content['field_menu']['#items'])): ?>
+            <?php foreach($content['field_menu']['#items'] as $index=>$menus): ?>
+              <a href="<?php print file_create_url($menus['uri']) ?>" class="fancybox" rel="res-menus"><?php if ($index === 0) { print 'See menu';} ?></a>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
         <!-- /.col-xs-7 -->
       </div>
       <!-- /.row -->
     </div>
     <!-- /.col-xs-7 -->
-    <div class="col-xs-5">
+    <div class="col-xs-12 col-md-5">
       <div class="row">
-        <div class="col-xs-8">
-          <img src="<?php print file_create_url($content['comment_images'][0]['#items'][0]['uri']); ?>" alt="">
+        <div class="col-xs-12 col-md-8">
+          <?php if (isset($content['comment_images'][0]['#items'][0]['uri'])): ?>
+            <a id="fancybox-comment-image-main" href="<?php print file_create_url($content['comment_images'][0]['#items'][0]['uri']); ?>"><img id="comment-image-main" class="img-responsive comment-image-main" src="<?php print file_create_url($content['comment_images'][0]['#items'][0]['uri']); ?>" alt=""></a>
+          <?php endif; ?>
+
         </div>
         <!-- /.col-xs-8 -->
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php if (isset($content['comment_images']) && $content['comment_images']):  ?>
-            <div class="comment_images_thumbs">
-              <?php foreach ($content['comment_images'][0]['#items'] as $images): ?>
-                <div class="res-thumb-container" style="background-image: url('<?php print file_create_url($images['uri']); ?>')"></div>
-              <?php endforeach; ?>
-
+            <div id="comment-image-thumb-up" class="comment-image-thumb-up">
+              <i class="fa fa-caret-up"></i>
             </div>
+            <div id="comment-image-thumbs-wrapper" class="comment-image-thumbs-wrapper">
+              <div id="comment-image-thumbs" class="comment-image-thumbs">
+                <?php foreach ($content['comment_images'] as $images): ?>
+                  <?php foreach ($images['#items'] as $image): ?>
+                    <div class="res-thumb-container" style="background-image: url('<?php print file_create_url($image['uri']); ?>')"></div>  
+                  <?php endforeach; ?>
+                <?php endforeach; ?>
+              </div>
+            </div>
+            <div id="comment-image-thumb-down" class="comment-image-thumb-down">
+              <i class="fa fa-caret-down"></i>
+            </div>            
           <?php endif; ?>
         </div>
         <!-- /.col-xs-4 -->
@@ -144,19 +160,21 @@
   <div class="row">
     <div class="col-xs-12">
       <h2><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-      <div class="review-stars">
-        <?php print _japaresreview_get_review_stars($content['comment_stars_avg']); ?>
-      </div>
+      <?php if($content['comment_stars_avg']): ?>
+        <div class="review-stars">
+          <?php print _japaresreview_get_review_stars($content['comment_stars_avg']); ?>
+        </div>
+      <?php endif; ?>
     </div>
     <!-- /.col-xs-12 -->
-    <div class="col-xs-4">
+    <div class="col-xs-12 col-md-4">
       <a href="<?php print $node_url; ?>">
         <div class="img-thumb res-thumb-container" style="background-image: url('<?php print file_create_url($content['comment_photo_uri']['#markup']); ?>');">
         </div>
       </a>
     </div>
     <!-- /.col-xs-4 -->
-    <div class="col-xs-8">
+    <div class="col-xs-12 col-md-8">
       <?php print render($content['field_budget']); ?>
       <?php print render($content['field_phone']); ?>
       <?php print render($content['field_address']); ?>

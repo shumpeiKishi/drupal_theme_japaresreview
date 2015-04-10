@@ -76,15 +76,15 @@
   <div class="container-fluid topbar">
     <div class="container">
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php print render($page['topbar_first']); ?>
         </div>
         <!-- /.col-xs-4 -->
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php print render($page['topbar_second']); ?>
         </div>
         <!-- /.col-xs-4 -->
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php print render($page['topbar_third']); ?>
         </div>
         <!-- /.col-xs-4 -->
@@ -97,7 +97,7 @@
   <div class="container-fluid">
     <div class="container">
       <div class="row">
-        <div class="col-xs-3">
+        <div class="col-xs-12 col-md-3">
          <?php if ($logo): ?>
            <div class="logo">
              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
@@ -108,11 +108,11 @@
         <?php endif; ?>            
       </div>
       <!-- /.col-xs-3 -->
-      <div class="col-xs-5">
+      <div class="col-xs-12 col-md-5">
         <?php print render($page['header_first']); ?>
       </div>
       <!-- /.col-xs-5 -->
-      <div class="col-xs-4">
+      <div class="col-xs-12 col-md-4">
         <?php print render($page['header_second']); ?>
       </div>
       <!-- /.col-xs-4 -->
@@ -162,38 +162,38 @@
 <div class="container-fluid">
   <div class="container">
     <div class="row">
-      <div class="col-xs-2">
-        <?php print render($page['sidebar_first']); ?>
-      </div>
-      <!-- /.col-xs-2 -->
-      <div class="col-xs-10">
-        <div class="row">
-          <div class="col-xs-12">
-            <?php print render($page['featured_second']); ?>    
-          </div>
-          <!-- /.col-xs-12 -->
+     <div class="col-xs-12 col-md-10 col-md-push-2">
+      <div class="row">
+        <div class="col-xs-12">
+          <?php print render($page['featured_second']); ?>    
         </div>
-        <!-- /.row -->
-        <div class="row">
-          <div class="col-xs-9">
-            <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
-            <?php print render($page['help']); ?>
-            <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
-            <?php print render($page['content']); ?>
-          </div>
-          <!-- /.col-xs-8 -->
-          <div class="col-xs-3">
-            <?php print render($page['sidebar_second']); ?>
-          </div>
-          <!-- /.col-xs-2 -->
-        </div>
-        <!-- /.row -->
+        <!-- /.col-xs-12 -->
       </div>
-      <!-- /.col-xs-10 -->
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-xs-12 col-md-9">
+          <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
+          <?php print render($page['help']); ?>
+          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
+          <?php print render($page['content']); ?>
+        </div>
+        <!-- /.col-xs-8 -->
+        <div class="col-xs-12 col-md-3">
+          <?php print render($page['sidebar_second']); ?>
+        </div>
+        <!-- /.col-xs-2 -->
+      </div>
+      <!-- /.row -->
     </div>
-    <!-- /.row -->
+    <!-- /.col-xs-10 -->
+    <div class="col-xs-12 col-md-2 col-md-pull-10">
+      <?php print render($page['sidebar_first']); ?>
+    </div>
+    <!-- /.col-xs-2 -->
   </div>
-  <!-- /.container -->
+  <!-- /.row -->
+</div>
+<!-- /.container -->
 </div>
 <!-- /.container-fluid -->
 
@@ -201,15 +201,15 @@
   <div class="container-fluid">
     <div class="container">
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php print render($page['footer_firstcolumn']); ?>
         </div>
         <!-- /.col-xs-4 -->
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php print render($page['footer_secondcolumn']); ?>
         </div>
         <!-- /.col-xs-4 -->
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
           <?php print render($page['footer_thirdcolumn']); ?>
         </div>
         <!-- /.col-xs-4 -->

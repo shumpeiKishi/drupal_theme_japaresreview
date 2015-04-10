@@ -54,7 +54,30 @@ a {
 }
 
 /* COMPONENTS */
-.review-stars {
+.btn-primary, .form-submit {
+  border-radius: 2px;
+  background-color: #c0392b;
+  border-color: #c0392b;
+}
+.btn-primary:hover, .form-submit:hover, .btn-primary:visited, .form-submit:visited, .btn-primary:active, .form-submit:active, .btn-primary:focus, .form-submit:focus {
+  background-color: #c43a2c;
+  border-color: #c0392b;
+}
+
+.form-submit {
+  color: #fff;
+  box-shadow: none;
+  border: 1px solid #c0392b;
+  padding: 0.8rem;
+  margin: 0.4rem;
+  min-width: 80px;
+}
+
+.form-text {
+  width: 100%;
+}
+
+.review-stars, #edit-field-stars-und {
   color: #c0392b;
 }
 
@@ -69,12 +92,17 @@ a {
   border-color: #c0392b;
 }
 
+.logout-link {
+  text-align: right;
+}
+.logout-link a, .logout-link a:hover, .logout-link a:visited {
+  color: #ffffff;
+}
+
 .view-restaurant-thumbs > .view-content, .view-popular-restaurants.view-display-id-block > .view-content {
   margin: 0 -1.5rem;
 }
 .view-restaurant-thumbs > .view-content > div, .view-popular-restaurants.view-display-id-block > .view-content > div {
-  width: 25%;
-  float: left;
   padding: 0 1.5rem;
   margin-bottom: 3rem;
 }
@@ -94,17 +122,102 @@ a {
   text-align: right;
 }
 
+#block-views-restaurant-thumbs-block h3 {
+  font-size: 3.2rem;
+}
 #block-views-restaurant-thumbs-block .view-content > .views-row .res-thumb-container {
   min-height: 20rem;
 }
 #block-views-restaurant-thumbs-block .view-content > .views-row .res-thumb-title {
   font: 700 2.4rem "Yanone Kaffeesatz";
 }
-#block-views-restaurant-thumbs-block .view-content > .views-row-first {
-  width: 50%;
+
+@media (min-width: 992px) {
+  .view-restaurant-thumbs > .view-content > div, .view-popular-restaurants.view-display-id-block > .view-content > div {
+    width: 25%;
+    float: left;
+  }
+
+  #block-views-restaurant-thumbs-block .view-content > .views-row-first {
+    width: 50%;
+  }
 }
-#block-views-restaurant-thumbs-block .view-content > .views-row-first .res-thumb-container {
-  min-height: 43rem;
+#block-views-new-photos-block div {
+  width: 100%;
+}
+#block-views-new-photos-block img {
+  width: 100%;
+  border: 2px solid #ffffff;
+}
+#block-views-new-photos-block img:hover {
+  border-color: #c0392b;
+}
+
+#block-views-new-reviews-block .views-row {
+  margin-bottom: 2rem;
+}
+#block-views-new-reviews-block .title-new-review {
+  margin-top: 0;
+}
+
+.field-name-field-photos .field-item {
+  display: inline-block;
+  margin: 0 1rem 1rem 0;
+}
+.field-name-field-photos img {
+  height: 12rem;
+  width: auto;
+  border: 2px solid #ffffff;
+}
+.field-name-field-photos img:hover {
+  border-color: #c0392b;
+}
+
+.user-picture img {
+  border: 1px solid #333;
+}
+
+.comment-image-thumbs-wrapper {
+  max-height: 40rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.comment-image-thumbs {
+  position: relative;
+  top: 0;
+}
+.comment-image-thumbs .res-thumb-container {
+  min-height: 8rem;
+  margin-bottom: 1rem;
+}
+
+.comment-image-thumb-up, .comment-image-thumb-down {
+  background-color: #c0392b;
+  text-align: center;
+  color: #fff;
+  border-radius: 2px;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+#edit-field-stars-und {
+  font-family: fontawesome;
+}
+#edit-field-stars-und .form-item-field-stars-und {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+#edit-field-stars-und label {
+  cursor: pointer;
+}
+#edit-field-stars-und input {
+  display: none;
+}
+
+#block-views-new-photos-block .views-row {
+  margin-bottom: 1rem;
 }
 
 /* STATE */

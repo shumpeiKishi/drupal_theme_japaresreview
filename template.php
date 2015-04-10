@@ -5,13 +5,33 @@
 drupal_add_css('http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300italic|Yanone+Kaffeesatz:400,700', array('type' => 'external'));
 drupal_add_css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', array('type' => 'external'));
 drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', array('type' => 'external'));
-drupal_add_css(drupal_get_path('theme', 'japaresreview') . '/assets/lib/fancybox/jquery.fancybox.css', array('type' => 'file'));
 
 
 /**
  * Add js files.
  */
-drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/lib/fancybox/jquery.fancybox.pack.js', 'file');
+drupal_add_js('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', 'external');
+
+
+/**
+ * Implements hook_theme().
+ */
+function japaresreview_theme(&$existing, $type, $theme, $path) {
+  // Add hook for block_user_login
+  $hooks['user_login_block'] = array(
+    'template' => 'templates/user_login_block',
+    'render element' => 'form',
+    );
+  return $hooks;
+}
+
+/**
+ * Implements hook_preprocess_block_user_login().
+ */
+function japaresreview_preprocess_user_login_block(&$variables) {
+  $variables['rendered'] = drupal_render_children($variables['form']);
+}
+
 
 /**
  * Implements hook_page_alter().
@@ -110,16 +130,22 @@ function japaresreview_preprocess_node(&$variables) {
       // For page view
       if ($view_mode === 'full') {
         // Add js for Google map api 
-        if (!isset($variables['field_address'][0])) { return ;}
-        // Add geocode to Drupal.setting.
-        $res_geocode = array(
-          'lat' => $variables['field_address'][0]['latitude'],
-          'lng' => $variables['field_address'][0]['longitude'],
-          );
-        drupal_add_js(array('resGeocode' => $res_geocode), 'setting');
-        // Googlemap API js file
-        drupal_add_js('http://maps.googleapis.com/maps/api/js?key=AIzaSyBMAAIRyYmd0OPAn4-2rRwgABrbpwQ9UdI&sensor=false', 'external');
-        drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/script.js', 'file');
+        if (isset($variables['field_address'][0])) { 
+          // Add geocode to Drupal.setting.
+          $res_geocode = array(
+            'lat' => $variables['field_address'][0]['latitude'],
+            'lng' => $variables['field_address'][0]['longitude'],
+            );
+          drupal_add_js(array('resGeocode' => $res_geocode), 'setting');
+          // Googlemap API js file
+          drupal_add_js('http://maps.googleapis.com/maps/api/js?key=AIzaSyBMAAIRyYmd0OPAn4-2rRwgABrbpwQ9UdI&sensor=false', 'external');
+          drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/restaurant-map.js', 'file');
+        }
+
+        // Add review star script.
+        drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/review-stars.js', 'file');
+        drupal_add_js(drupal_get_path('theme', 'japaresreview') . '/assets/js/switch-main-image.js', 'file');
+
       }
 
       // For teaser.
@@ -155,11 +181,10 @@ function japaresreview_preprocess_views_view_fields(&$variables) {
       break;
     } // Case: 'popular_restaurants'.
     case 'new_reviews' : {
-      if (isset($variables['row']->users_node_picture) && $variables['row']->users_node_picture != 0) {
+      $user = user_load($variables['row']->comment_uid);
+      if (isset($user->picture->uri)) {
         // Get user picture url for new_review view.
-        $user_photo_fid = $variables['row']->users_node_picture;
-        $user_photo = file_load($user_photo_fid);
-        $user_photo_url = file_create_url($user_photo->uri);
+        $user_photo_url = file_create_url($user->picture->uri);
         $variables['row']->comment_user_picture_url = $user_photo_url;
       } else {
         $variables['row']->comment_user_picture_url = 'http://japaresreview.dd:8083/sites/japaresreview.dd/files/logo.png';
@@ -207,6 +232,9 @@ return $star_nums;
 
 function _japaresreview_get_review_star_avg ($nid) {
   $stars = _japaresreview_get_review_star_num($nid);
+  if(count($stars) == 0) {
+    return false;
+  }
   $stars_avg = intval(round(array_sum($stars) / count($stars)));
   return $stars_avg;
 } 

@@ -24,10 +24,9 @@
 ?>
 <div class="row">
   <div class="col-xs-2">
-    <img class="user_picture" src="<?php print $row->comment_user_picture_url; ?>" alt="User Profile Image">
+    <img class="user-picture img-responsive" src="<?php print $row->comment_user_picture_url; ?>" alt="User Profile Image">
   </div>
   <div class="col-xs-10">
-
     <h4 class="title title-new-review">
       <?php print $row->comment_subject; ?>
     </h4>
@@ -38,14 +37,19 @@
       <?php print $row->field_comment_body[0]['rendered']['#markup']; ?>
     </div>
     <?php if(isset($row->field_field_photos)): ?>
-      <div class="res-review-photos">
+      <div class="res-review-photos field-name-field-photos">
         <?php foreach ($row->field_field_photos as $index=>$photos): ?>
-          <img src="<?php print file_create_url($photos['rendered']['#item']['uri']) ?>" alt="">
-        <?php endforeach; ?>
-      <?php endif; ?>
-      <div class="submitted">
-        Submitted by <?php print $row->users_node_name; ?> on <?php print format_date($row->comment_created); ?> for <?php print $row->node_comment_title; ?>.
-      </div>
-    </div>
-  </div>
+          <div class="field-item">
+            <a href="<?php print file_create_url($photos['rendered']['#item']['uri']) ?>">
+             <img class="review-photo review-photo-new-reviews" src="<?php print file_create_url($photos['rendered']['#item']['uri']) ?>" alt="">   
+           </a>
+           
+         </div>
+       <?php endforeach; ?>
+     <?php endif; ?>
+     <div class="submitted">
+       Submitted by <?php print $row->comment_name; ?> on <?php print format_date($row->comment_created); ?> for <?php print $row->node_comment_title; ?>.
+     </div>
+   </div>
+ </div>
 </div>

@@ -59,6 +59,7 @@
  * @ingroup themeable
  */
 ?>
+<?php //dsm($content); ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <div class="row">
     <div class="col-xs-12">
@@ -67,11 +68,11 @@
      <?php print render($title_suffix); ?>
    </div>
    <!-- /.col-xs-12 -->
-   <div class="col-xs-2">
+   <div class="col-xs-12 col-md-2">
      <?php print $picture; ?>
    </div>
    <!-- /.col-xs-2 -->
-   <div class="col-xs-10">
+   <div class="col-xs-12 col-md-10">
      <div class="content"<?php print $content_attributes; ?>>
        <?php if (isset($content['field_stars']) && $content['field_stars']): ?>
         <div class="review-stars">
@@ -81,7 +82,12 @@
       <div class="review-body">
        <?php print render($content['comment_body']); ?>
      </div>
-     <div class="submitted">
+     <?php if (isset($content['field_photos'])): ?>
+      <div class="review-photos">
+        <?php print render($content['field_photos']); ?>
+      </div>
+    <?php endif; ?>
+    <div class="submitted">
       <?php print $submitted; ?>
     </div>
     <?php if ($signature): ?>

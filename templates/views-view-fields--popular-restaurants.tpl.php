@@ -26,23 +26,26 @@
 <div class="row">
   <div class="col-xs-12">
     <h2><?php print $fields['title']->content; ?></h2>
-    <div class="review-stars">
-      <?php print _japaresreview_get_review_stars($row->comment_stars_avg); ?>
-    </div>
+    <?php if($row->comment_stars_avg): ?>
+      <div class="review-stars">
+        <?php print _japaresreview_get_review_stars($row->comment_stars_avg); ?>
+      </div>
+    <?php endif; ?>
   </div>
   <!-- /.col-xs-12 -->
-  <div class="col-xs-4">
+  <div class="col-xs-12 col-md-4">
     <a href="<?php print url('node/' . $row->nid); ?>">
       <div class="img-thumb res-thumb-container" style="background-image: url('<?php print file_create_url($row->comment_photo_uri); ?>');">
       </div>
     </a>
   </div>
   <!-- /.col-xs-4 -->
-  <div class="col-xs-8">
-    <?php print $fields['field_budget']->content; ?>
-    <?php print $fields['field_phone']->content; ?>
-    <?php print $fields['field_address']->content; ?>
-    <?php print $fields['body']->content; ?>
+  <div class="col-xs-12 col-md-8">
+    <p>Budget: <?php print $fields['field_budget']->content; ?></p>
+    <p>Phone: <?php print $fields['field_phone']->content; ?></p>
+    <div><?php print $fields['field_address']->content; ?></div>
+    <div><?php print $fields['body']->content; ?></div>
+    
   </div>
   <!-- /.col-xs-8 -->
 </div>
