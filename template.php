@@ -1,6 +1,6 @@
 <?php
 /**
- * Add css files.
+ * Add external css files.
  */
 drupal_add_css('http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300italic|Yanone+Kaffeesatz:400,700', array('type' => 'external'));
 drupal_add_css('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', array('type' => 'external'));
@@ -161,7 +161,7 @@ function japaresreview_preprocess_node(&$variables) {
 }
 
 /**
- * 
+ * Implements template_preprocess_comment().
  */
 function japaresreview_preprocess_comment(&$variables) {
   unset($variables['content']['links']['comment']['#links']['comment-reply']);
@@ -215,7 +215,8 @@ function _japaresreview_get_comment_image ($nid) {
 }
 
 /**
- * 
+ * @param  nodeId
+ * @return  array numbers of stars a restaurant got from each comment [description]
  */
 
 function _japaresreview_get_review_star_num ($nid) {
@@ -240,7 +241,9 @@ function _japaresreview_get_review_star_avg ($nid) {
 } 
 
 /**
- * 
+ * Output the stars to in templates
+ * @param   $star_num integier between 1 - 5
+ * @return  string HTML output of review stars
  */
 
 function _japaresreview_get_review_stars ($star_num) {
