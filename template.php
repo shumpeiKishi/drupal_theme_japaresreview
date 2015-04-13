@@ -8,7 +8,7 @@ drupal_add_css('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.mi
 
 
 /**
- * Add js files.
+ * Add external js files.
  */
 drupal_add_js('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', 'external');
 
@@ -215,8 +215,9 @@ function _japaresreview_get_comment_image ($nid) {
 }
 
 /**
- * @param  nodeId
- * @return  array numbers of stars a restaurant got from each comment [description]
+ * Get an array of review star numbers a restaurant got.
+ * @param  $nid Node id of restaurant page.
+ * @return  array 
  */
 
 function _japaresreview_get_review_star_num ($nid) {
@@ -230,6 +231,12 @@ function _japaresreview_get_review_star_num ($nid) {
 }
 return $star_nums;
 }
+
+/**
+ * Get average number of stars a restaurant get.
+ * @param $nid Node id of restaurant page.
+ * @return integer
+ */
 
 function _japaresreview_get_review_star_avg ($nid) {
   $stars = _japaresreview_get_review_star_num($nid);
