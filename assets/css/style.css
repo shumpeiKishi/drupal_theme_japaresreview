@@ -150,6 +150,7 @@ a {
 }
 #block-views-new-photos-block img {
   width: 100%;
+  height: auto;
   border: 2px solid #ffffff;
 }
 #block-views-new-photos-block img:hover {
